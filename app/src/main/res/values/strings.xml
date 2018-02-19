@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Bijuka</string>
+    <string name="action_settings">Settings</string>
+    <string name="mainPageTitle">Semicolons 2018</string>
+    <string name="backButton">back</string>
+    <string name="topic">alert</string>
+</resources>
