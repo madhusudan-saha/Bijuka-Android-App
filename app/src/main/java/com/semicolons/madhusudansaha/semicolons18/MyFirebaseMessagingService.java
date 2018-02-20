@@ -30,6 +30,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessageService";
     Bitmap bitmap;
+    AppDatabase db;
 
     /**
      * Called when message is received.
@@ -58,12 +59,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
-        //The message which i send will have keys named [message, image, AnotherActivity] and corresponding values.
-        //You can change as per the requirement.
-
         //message will contain the Push Message
         String deviceID = remoteMessage.getData().get("deviceID");
-        //imageUri will contain URL of the image to be displayed with Notification
         String image = remoteMessage.getData().get("image");
         String type = remoteMessage.getData().get("type");
         String location = remoteMessage.getData().get("location");
@@ -71,9 +68,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String buzz = remoteMessage.getData().get("buzz");
         Long t = Long.parseLong(timestamp);
         String time = (new SimpleDateFormat("hh:mm:ss")).format(new Date(t));
-        //If the key AnotherActivity has  value as True then when the user taps on notification, in the app AnotherActivity will be opened.
-        //If the key AnotherActivity has  value as False then when the user taps on notification, in the app MainActivity will be opened.
-        //String TrueOrFlase = remoteMessage.getData().get("AnotherActivity");
 
         //To get a Bitmap image from the base64 encoded string received
         bitmap = ImageRetrieve.base64ToImage(image);
@@ -114,30 +108,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri sound;
         boolean buzzTime = false;
 
-        try{
-            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        if(buzz.equalsIgnoreCase("true")) {
+            db = ((MyApplication) this.getApplication()).getDb();
 
-            File directory = cw.getDir("dir", Context.MODE_PRIVATE);
-
-            File file=new File(directory, "buzz_time");
-
-            Date lastModDate = new Date(file.lastModified());
-            Log.d("Last modified : ", lastModDate.toString());
-
-            Date currentDate = new Date();
-
-            long diff = currentDate.getTime() - lastModDate.getTime();
-            long seconds = diff / 1000;
-
-            if(seconds >= 30) {
+            DataStore ds = null;
+            ds = db.dataStoreDao().findByName("buzz_time");
+            if (ds != null) {
+                long diff = System.currentTimeMillis() - (Long.parseLong(ds.getValue()));
+                long seconds = diff / 1000;
+                if (seconds >= 20) {
+                    buzzTime = true;
+                }
+            } else {
                 buzzTime = true;
             }
-
-        } catch (Exception e){
-            e.printStackTrace();
         }
 
-        if(buzz.equalsIgnoreCase("True") && buzzTime) {
+        if(buzzTime) {
             sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.buzzer);
         }
         else {

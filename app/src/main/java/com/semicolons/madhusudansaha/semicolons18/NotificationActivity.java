@@ -43,6 +43,7 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
     String time;
     String buzz;
     String imagePath;
+    AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,8 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
         setContentView(R.layout.activity_notification);
 
         Window window = this.getWindow();
-        // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.primary_dark));
         window.setNavigationBarColor(getResources().getColor(R.color.primary_dark));
 
@@ -83,13 +81,23 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
 
         //Toast.makeText(this, "Alert!", Toast.LENGTH_SHORT).show();
 
-        setResult(RESULT_OK, values);
-
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        db = ((MyApplication) this.getApplication()).getDb();
+        DataStore ds = null;
+        ds = db.dataStoreDao().findByName("buzz_time");
+        if(ds != null) {
+            db.dataStoreDao().update(new DataStore("buzz_time", Long.toString(System.currentTimeMillis())));
+        }
+        else {
+            db.dataStoreDao().insert(new DataStore("buzz_time", Long.toString(System.currentTimeMillis())));
+        }
+
+        setResult(RESULT_OK, values);
     }
 
     @Override
@@ -145,33 +153,16 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 16));
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        db.dataStoreDao().update(new DataStore("buzz_time", Long.toString(System.currentTimeMillis())));
+        this.finish();
+    }
+
     public void backButton(View view) {
-        //setResult(RESULT_OK);
+        db.dataStoreDao().update(new DataStore("buzz_time", Long.toString(System.currentTimeMillis())));
         this.finish();
     }
 
-    public void okButton(View view) {
-        FileOutputStream stream = null;
-        if(buzz.equals("True")) {
-            try {
-                ContextWrapper cw = new ContextWrapper(getApplicationContext());
-
-                File directory = cw.getDir("dir", Context.MODE_PRIVATE);
-
-                File file = new File(directory, "buzz_time");
-
-                stream = new FileOutputStream(file);
-                stream.write(new Date().toString().getBytes());
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    stream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        this.finish();
-    }
 }

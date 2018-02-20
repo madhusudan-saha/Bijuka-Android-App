@@ -65,9 +65,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Subscribe"
+            android:text="@string/subscribe"
             android:textSize="20sp"
             android:background="@color/background"
+            android:clickable="false"
             android:id="@+id/subscribeButton" />
     </RelativeLayout>
 

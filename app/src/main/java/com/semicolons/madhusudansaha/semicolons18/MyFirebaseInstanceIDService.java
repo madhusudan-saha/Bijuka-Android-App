@@ -62,6 +62,21 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         return true;
     }
 
+    protected static boolean unsubscribeFromPushService(Context applicationContext) {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(applicationContext.getResources().getString(R.string.topic));
+        Log.d(applicationContext.getResources().getString(R.string.app_name), "Unsubscribed");
+        Toast.makeText(applicationContext, "Unsubscribed", Toast.LENGTH_SHORT).show();
+        //String token = FirebaseInstanceId.getInstance().getToken();
+
+        /*
+        if(token != null) {
+            SaveToken.saveTokenToFile(token, applicationContext);
+        }
+        */
+
+        return false;
+    }
+
     /**
      * Persist token to third-party servers.
      *
