@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 /**
  * Created by Madhusudan Saha on 12-Feb-18.
  */
@@ -26,17 +28,30 @@ public class MainActivity extends AppCompatActivity {
     CheckedTextView subscribedCheckedTextView;
     AppDatabase db;
 
+    HashMap<String,String> mp=new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mp.put("Hi","बिजूका");
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.primary_dark));
         window.setNavigationBarColor(getResources().getColor(R.color.primary_dark));
-
+        Button testButton = (Button) findViewById(R.id.testButton);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent testIntent = new Intent(getApplicationContext(),HealthMonitor.class);
+                    startActivity(testIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         ImageView backButton = (ImageView) findViewById(R.id.back_button);
         backButton.setVisibility(View.GONE);
 
@@ -149,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         if(subUnsub.equalsIgnoreCase(getResources().getString(R.string.unsubscribe))) {
             MyFirebaseInstanceIDService.unsubscribeFromPushService(getApplicationContext());
             ds = new DataStore("subscribed", "false");
-            subscribeButton.setText(getResources().getString(R.string.subscribe));
+            subscribeButton.setText(getResources().getString(R.string.subscribe)+mp.get("Hi"));
             subscribedCheckedTextView.setChecked(false);
         }
         else {

@@ -77,7 +77,7 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
         typeTextView.setText(type);
 
         timeTextView = (TextView) findViewById(R.id.timeTextView);
-        timeTextView.setText(time+" : ");
+        timeTextView.setText(time+"");
 
         //Toast.makeText(this, "Alert!", Toast.LENGTH_SHORT).show();
 
