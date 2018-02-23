@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button english;
     Button hindi;
     Button marathi;
+    Button testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +42,7 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.primary_dark));
         window.setNavigationBarColor(getResources().getColor(R.color.primary_dark));
-        Button testButton = (Button) findViewById(R.id.testButton);
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent testIntent = new Intent(getApplicationContext(),HealthMonitor.class);
-                    startActivity(testIntent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
         ImageView backButton = (ImageView) findViewById(R.id.back_button);
         backButton.setVisibility(View.GONE);
 
@@ -84,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     subscribeUnsubscribe();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        
+        testButton = (Button) findViewById(R.id.testButton);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent testIntent = new Intent(getApplicationContext(),HealthMonitor.class);
+                    startActivity(testIntent);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -214,11 +217,12 @@ public class MainActivity extends AppCompatActivity {
     private void chooseLanguage(View v) {
         String language = ((Button) v).getText().toString();
         DataStore ds = db.dataStoreDao().findByName("language");
-        ds.setValue(language);
-        db.dataStoreDao().update(ds);
+        if(!ds.getKey().equalsIgnoreCase(language)) {
+            ds.setValue(language);
+            db.dataStoreDao().update(ds);
 
-        finish();
-        startActivity(getIntent());
+            translate();
+        }
     }
 
     private void translate() {
