@@ -37,6 +37,11 @@ public class HealthMonitor extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 

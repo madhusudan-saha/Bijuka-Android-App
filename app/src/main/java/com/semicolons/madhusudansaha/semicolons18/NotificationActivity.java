@@ -125,7 +125,16 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_english) {
+
+            return true;
+        }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_hindi) {
+            return true;
+        }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_marathi) {
             return true;
         }
 

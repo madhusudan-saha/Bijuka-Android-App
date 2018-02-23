@@ -1,13 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    >
 
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/action_hindi"
         android:icon="@drawable/icon_back"
-        android:title="@string/backButton"
-        app:showAsAction="always"/>
+        android:title="@string/hindi"
+        android:actionLayout="@layout/my_toolbar"
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_english"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:actionLayout="@layout/my_toolbar"
+        android:title="@string/english" />
+    >
+    <item
+        android:id="@+id/action_marathi"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:actionLayout="@layout/my_toolbar"
+        android:title="@string/marathi" />
+    >
 </menu>

@@ -11,6 +11,7 @@
     <string name="mainPageTitle">Semicolons 2018</string>
     <string name="subscribe">Subscribe For Notification</string>
     <string name="unsubscribe">Unsubscribe For Notification</string>
+    <string name="testbot">Test Drone</string>
 
     <!--Notification Activity-->
 

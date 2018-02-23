@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,11 +32,14 @@ public class MainActivity extends AppCompatActivity {
     Button hindi;
     Button marathi;
     Button testButton;
-
+    public Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
 
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        
+
         testButton = (Button) findViewById(R.id.testButton);
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         english = (Button) findViewById(R.id.english);
         hindi = (Button) findViewById(R.id.hindi);
         marathi = (Button) findViewById(R.id.marathi);
@@ -126,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        */
         translate();
         // If a notification message is tapped, any data accompanying the notification
         // message is available in the intent extras. In this project the launcher
@@ -187,7 +192,30 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_english) {
+            try {
+                chooseLanguage("English");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_hindi) {
+            try {
+            chooseLanguage(getResources().getString(R.string.hindi));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            return true;
+        }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_marathi) {
+            try {
+                chooseLanguage(getResources().getString(R.string.marathi));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
 
@@ -216,6 +244,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void chooseLanguage(View v) {
         String language = ((Button) v).getText().toString();
+        DataStore ds = db.dataStoreDao().findByName("language");
+        if(!ds.getKey().equalsIgnoreCase(language)) {
+            ds.setValue(language);
+            db.dataStoreDao().update(ds);
+
+            translate();
+        }
+    }
+    private void chooseLanguage(String v) {
+        String language = v;
         DataStore ds = db.dataStoreDao().findByName("language");
         if(!ds.getKey().equalsIgnoreCase(language)) {
             ds.setValue(language);

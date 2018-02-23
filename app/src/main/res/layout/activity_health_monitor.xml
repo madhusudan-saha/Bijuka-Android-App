@@ -18,19 +18,18 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/drone"
+        android:background="@drawable/test_bg"
         >
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
-            android:src="@android:drawable/ic_lock_idle_low_battery"
-            android:background="@color/background"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+android:src="@drawable/battery"
             android:id="@+id/lightIcon"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/soundIcon"
-            android:layout_marginStart="16dp"
-            app:layout_constraintLeft_toLeftOf="parent" android:contentDescription="@string/light_content" />
+            android:contentDescription="@string/light_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintRight_toRightOf="parent" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -78,26 +77,14 @@
             app:layout_constraintLeft_toRightOf="@+id/soundIcon"
             app:layout_constraintHorizontal_bias="1.0"
             android:layout_marginTop="24dp" />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/batteryButton"
-            android:text="@string/check_battery_status"
-            android:background="@drawable/tags"
-            app:layout_constraintLeft_toRightOf="@+id/batteryIcon"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/soundButton"
-            app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp" />
+
 
         <Button
             android:text="@string/live"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:id="@+id/live"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="288dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="16dp"
             app:layout_constraintRight_toRightOf="parent" />
