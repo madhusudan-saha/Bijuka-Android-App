@@ -15,6 +15,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "DB").allowMainThreadQueries().build();
+        if(db.dataStoreDao().findByName("language") == null) {
+            db.dataStoreDao().insert(new DataStore("language", "English"));
+        }
     }
 
     public AppDatabase getDb() {

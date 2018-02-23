@@ -30,6 +30,8 @@
         <activity
             android:name=".NotificationActivity"
             android:label="@string/app_name" />
+        <activity android:name=".HealthMonitor" />
+        <activity android:name=".LiveStreaming" />
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
@@ -41,9 +43,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <activity android:name=".DeviceHealth" />
-        <activity android:name=".HealthMonitor"></activity>
     </application>
 
 </manifest>

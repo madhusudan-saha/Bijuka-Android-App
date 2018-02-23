@@ -1,9 +1,23 @@
 <resources>
-    <string name="app_name">बिजूका</string>
+    <string name="app_name">BIJUKA</string>
     <string name="action_settings">Settings</string>
-    <string name="mainPageTitle">Semicolons 2018</string>
     <string name="backButton">back</string>
     <string name="topic">alert</string>
+    <string name="english">English</string>
+    <string name="hindi">हिंदी</string>
+    <string name="marathi">मराठी</string>
+
+    <!--Main Activity-->
+    <string name="mainPageTitle">Semicolons 2018</string>
     <string name="subscribe">Subscribe For Notification</string>
     <string name="unsubscribe">Unsubscribe For Notification</string>
+
+    <!--Notification Activity-->
+
+    <!--Health Monitor Activity-->
+    <string name="checkLightStatus">Check Light Status</string>
+    <string name="checkSoundStatus">Check Sound Status</string>
+    <string name="checkBatteryStatus">Check Battery Status</string>
+
+    <!--Classes-->
 </resources>

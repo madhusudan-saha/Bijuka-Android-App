@@ -27,14 +27,15 @@ public class MainActivity extends AppCompatActivity {
     Button subscribeButton;
     CheckedTextView subscribedCheckedTextView;
     AppDatabase db;
+    Button english;
+    Button hindi;
+    Button marathi;
 
-    HashMap<String,String> mp=new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mp.put("Hi","बिजूका");
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -89,8 +90,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        subscribeButton.setClickable(true);
+        english = (Button) findViewById(R.id.english);
+        hindi = (Button) findViewById(R.id.hindi);
+        marathi = (Button) findViewById(R.id.marathi);
+        english.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    chooseLanguage(v);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        hindi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    chooseLanguage(v);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        marathi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    chooseLanguage(v);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
+        translate();
         // If a notification message is tapped, any data accompanying the notification
         // message is available in the intent extras. In this project the launcher
         // intent is fired when the notification is tapped, so any accompanying data would
@@ -127,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("Result", "NotificationActivityClosed: " + data.toString());
+        //Log.d("Result", "NotificationActivityClosed: " + data.toString());
     }
 
     @Override
@@ -159,20 +193,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void subscribeUnsubscribe() {
         DataStore ds = null;
-        String subUnsub = (String) subscribeButton.getText();
+        Boolean subUnsub = subscribedCheckedTextView.isChecked();
+        String language = db.dataStoreDao().findByName("language").getValue();
 
-        if(subUnsub.equalsIgnoreCase(getResources().getString(R.string.unsubscribe))) {
+        if(subUnsub) {
             MyFirebaseInstanceIDService.unsubscribeFromPushService(getApplicationContext());
             ds = new DataStore("subscribed", "false");
-            subscribeButton.setText(getResources().getString(R.string.subscribe)+mp.get("Hi"));
+            subscribeButton.setText(Constants.TRANSLATION.get(R.string.subscribe).get(Constants.LANGUAGE.get(language)));
             subscribedCheckedTextView.setChecked(false);
         }
         else {
             MyFirebaseInstanceIDService.subscribeToPushService(getApplicationContext());
             ds = new DataStore("subscribed", "true");
-            subscribeButton.setText(getResources().getString(R.string.unsubscribe));
+            subscribeButton.setText(Constants.TRANSLATION.get(R.string.unsubscribe).get(Constants.LANGUAGE.get(language)));
             subscribedCheckedTextView.setChecked(true);
         }
         db.dataStoreDao().update(ds);
+    }
+
+    private void chooseLanguage(View v) {
+        String language = ((Button) v).getText().toString();
+        DataStore ds = db.dataStoreDao().findByName("language");
+        ds.setValue(language);
+        db.dataStoreDao().update(ds);
+
+        finish();
+        startActivity(getIntent());
+    }
+
+    private void translate() {
+        String language = db.dataStoreDao().findByName("language").getValue();
+
+        if(subscribedCheckedTextView.isChecked()) {
+            subscribeButton.setText(Constants.TRANSLATION.get(R.string.unsubscribe).get(Constants.LANGUAGE.get(language)));
+        }
+        else {
+            subscribeButton.setText(Constants.TRANSLATION.get(R.string.subscribe).get(Constants.LANGUAGE.get(language)));
+        }
     }
 }
