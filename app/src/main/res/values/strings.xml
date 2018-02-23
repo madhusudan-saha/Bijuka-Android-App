@@ -18,6 +18,13 @@
     <string name="checkLightStatus">Check Light Status</string>
     <string name="checkSoundStatus">Check Sound Status</string>
     <string name="checkBatteryStatus">Check Battery Status</string>
+    <string name="check_light_status">Check Light Status</string>
+    <string name="check_sound_status">Check Sound Status</string>
+    <string name="check_battery_status">Check Battery Status</string>
+    <string name="live">LIVE</string>
+    <string name="light_content">LIGHT</string>
+    <string name="sound_content">SOUND</string>
+    <string name="battery_content">BATTERY</string>
 
     <!--Classes-->
 </resources>

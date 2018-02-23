@@ -23,13 +23,14 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+
             android:src="@android:drawable/ic_lock_idle_low_battery"
             android:background="@color/background"
             android:id="@+id/lightIcon"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/soundIcon"
             android:layout_marginStart="16dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent" android:contentDescription="@string/light_content" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -39,7 +40,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/batteryIcon"
             android:layout_marginStart="16dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent" android:contentDescription="@string/sound_content" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -50,12 +51,12 @@
             android:layout_marginTop="100dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent" android:contentDescription="@string/battery_content" />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/flashButton"
-            android:text="Check Light Status"
+            android:text="@string/check_light_status"
             android:background="@drawable/tags"
             app:layout_constraintLeft_toRightOf="@+id/batteryIcon"
             android:layout_marginTop="96dp"
@@ -68,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/soundButton"
-            android:text="Check Sound Status"
+            android:text="@string/check_sound_status"
             android:background="@drawable/tags"
             android:layout_marginEnd="16dp"
             app:layout_constraintRight_toRightOf="parent"
@@ -81,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/batteryButton"
-            android:text="Check Battery Status"
+            android:text="@string/check_battery_status"
             android:background="@drawable/tags"
             app:layout_constraintLeft_toRightOf="@+id/batteryIcon"
             android:layout_marginEnd="16dp"
@@ -92,7 +93,7 @@
             android:layout_marginTop="24dp" />
 
         <Button
-            android:text="LIVE"
+            android:text="@string/live"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:id="@+id/live"

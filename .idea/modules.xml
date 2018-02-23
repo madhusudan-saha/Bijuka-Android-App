@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Bijuka.iml" filepath="$PROJECT_DIR$/Bijuka.iml" />
+      <module fileurl="file://D:\VCS\Bijuka-Android-App\Bijuka.iml" filepath="D:\VCS\Bijuka-Android-App\Bijuka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bijuka-Android-App.iml" filepath="$PROJECT_DIR$/Bijuka-Android-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
