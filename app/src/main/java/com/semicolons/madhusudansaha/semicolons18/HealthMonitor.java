@@ -51,13 +51,26 @@ public class HealthMonitor extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        translate();
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    protected void onStart() {
+        super.onStart();
+
+        translate();
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        this.finish();
+    }
+
+    public void backButton(View view) {
+        this.finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

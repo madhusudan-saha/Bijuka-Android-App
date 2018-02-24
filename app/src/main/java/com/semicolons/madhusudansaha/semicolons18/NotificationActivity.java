@@ -105,7 +105,16 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
             db.dataStoreDao().insert(new DataStore("buzz_time", Long.toString(System.currentTimeMillis())));
         }
 
+        translate();
+
         setResult(RESULT_OK, values);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        translate();
     }
 
     @Override

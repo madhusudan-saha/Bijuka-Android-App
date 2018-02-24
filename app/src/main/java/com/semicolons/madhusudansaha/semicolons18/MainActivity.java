@@ -99,42 +99,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
-        /*
-        english = (Button) findViewById(R.id.english);
-        hindi = (Button) findViewById(R.id.hindi);
-        marathi = (Button) findViewById(R.id.marathi);
-        english.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    chooseLanguage(v);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        hindi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    chooseLanguage(v);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        marathi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    chooseLanguage(v);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        */
-        translate();
+
         // If a notification message is tapped, any data accompanying the notification
         // message is available in the intent extras. In this project the launcher
         // intent is fired when the notification is tapped, so any accompanying data would
@@ -159,6 +124,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        translate();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -171,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        translate();
         //Log.d("Result", "NotificationActivityClosed: " + data.toString());
     }
 
@@ -196,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_english) {
             try {
-                Language.chooseLanguage("English", this);
+                Language.chooseLanguage(getResources().getString(R.string.english), this);
                 translate();
             } catch (Exception e) {
                 e.printStackTrace();

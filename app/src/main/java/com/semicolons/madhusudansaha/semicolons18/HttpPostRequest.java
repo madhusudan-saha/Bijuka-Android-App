@@ -21,7 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by madhusudan_saha on 23-02-2018.
  */
 
-class PostCall extends AsyncTask<String, String, String> {
+class HttpPostRequest extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... args) {
