@@ -16,7 +16,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/farm1"
+        android:background="@drawable/farm1_blur"
         android:layout_weight="1">
 
         <CheckedTextView
