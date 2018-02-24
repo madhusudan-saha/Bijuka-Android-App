@@ -2,18 +2,27 @@ package com.semicolons.madhusudansaha.semicolons18;
 
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -25,6 +34,8 @@ public class HealthMonitor extends AppCompatActivity {
     TextView toolbarTitle;
     AppDatabase db;
     Toolbar toolbar;
+    ImageView batteryIcon;
+    ImageView soundIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,8 @@ public class HealthMonitor extends AppCompatActivity {
         flashButton = (Button) findViewById(R.id.flashButton);
         soundButton = (Button) findViewById(R.id.soundButton);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
+        batteryIcon = (ImageView) findViewById(R.id.batteryIcon);
+        soundIcon = (ImageView) findViewById(R.id.soundIcon);
 
         live.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
@@ -56,31 +69,55 @@ public class HealthMonitor extends AppCompatActivity {
 
         flashButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            batteryIcon.setImageDrawable(getResources().getDrawable(R.drawable.light));
+                            batteryIcon.setBackgroundTintList(new ColorStateList(new int[][]{{}}, new int[]{getResources().getColor(R.color.green)}));                       }
+                    }, 500);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            batteryIcon.setImageDrawable(getResources().getDrawable(R.drawable.close_light));
+                            batteryIcon.setBackgroundTintList(new ColorStateList(new int[][]{{}}, new int[]{getResources().getColor(R.color.red)}));                       }
+                    }, 3000);
+             /*
                 String url = "http://192.168.43.185:3003/lightdiag";
                 String result;
                 HttpPostRequest s = new HttpPostRequest();
                 try {
-                    result = s.execute(url, "").get();
-                    
+                    result = s.execute(url).get();
+                    Toast.makeText(getApplicationContext(), "Result: "+result, Toast.LENGTH_SHORT).show();
+                    Log.d("Result: ", result);
+                    JSONObject obj = new JSONObject(result);
+                    String status = obj.getString("status");
+                    Toast.makeText(getApplicationContext(), status, Toast.LENGTH_SHORT).show();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                */
             }
         });
         soundButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                String url = "http://192.168.43.185:3003/audiodiag";
-                String result;
-                HttpPostRequest s = new HttpPostRequest();
-                try {
-                    result = s.execute(url, "").get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        soundIcon.setImageDrawable(getResources().getDrawable(R.drawable.sound_up));
+                        soundIcon.setBackgroundTintList(new ColorStateList(new int[][]{{}}, new int[]{getResources().getColor(R.color.green)}));                       }
+                }, 500);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        soundIcon.setImageDrawable(getResources().getDrawable(R.drawable.sound_down));
+                        soundIcon.setBackgroundTintList(new ColorStateList(new int[][]{{}}, new int[]{getResources().getColor(R.color.red)}));                       }
+                }, 3000);
             }
         });
 

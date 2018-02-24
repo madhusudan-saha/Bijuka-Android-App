@@ -27,11 +27,8 @@ class HttpPostRequest extends AsyncTask<String, String, String> {
     protected String doInBackground(String... args) {
 
         String urlStr = args[0];
-        String dataStr = args[1];
         try {
             URL url = new URL(urlStr); // here is your URL path
-
-            JSONObject data = new JSONObject(dataStr);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000 /* milliseconds */);
@@ -40,17 +37,6 @@ class HttpPostRequest extends AsyncTask<String, String, String> {
             conn.setRequestProperty("Content-Type", "text/plain");
             conn.setDoInput(true);
             conn.setDoOutput(true);
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            Log.d("Data: ", data.toString());
-            writer.write(data.toString());
-            //writer.write(getPostDataString(data));
-
-            writer.flush();
-            writer.close();
-            os.close();
 
             int responseCode=conn.getResponseCode();
 
