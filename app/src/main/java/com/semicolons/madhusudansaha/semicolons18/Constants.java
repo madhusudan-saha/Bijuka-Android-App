@@ -24,15 +24,15 @@ public final class Constants {
 
         Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();
         //Main Activity
-        map.put(R.string.app_name, Arrays.asList("BIJUKA", "बिजूका", "बागुलबुवा"));
+        map.put(R.string.app_name, Arrays.asList("BIJUKA", "बिजूका", "बुजगावणे"));
         map.put(R.string.subscribe, Arrays.asList("Subscribe For Notification", "अधिसूचना के लिए सदस्यता लें", "सूचना साठी सदस्यता घ्या"));
         map.put(R.string.unsubscribe, Arrays.asList("Unsubscribe For Notification", "अधिसूचना के लिए सदस्यता समाप्त करें", "अधिसूचना रद्द करा"));
-        map.put(R.string.testbot, Arrays.asList("Test Drone", "टेस्ट ड्रोन", "टेस्ट ड्रोन"));
+        map.put(R.string.testbot, Arrays.asList("Test Device", "उपकरण जांचे", "चाचणी साधन"));
 
         //Health Monitor Activity
-        map.put(R.string.light_content, Arrays.asList("Check Light Status", "लाइट स्टेटस की जांच करें", "लाईट स्थिती तपासा"));
-        map.put(R.string.sound_content, Arrays.asList("Check Sound Status", "ध्वनि स्थिति जांचें", "ध्वनी स्थिती तपासा"));
-        map.put(R.string.live, Arrays.asList("LIVE", "लाइव स्ट्रीम", "थेट प्रसारण"));
+        map.put(R.string.light_content, Arrays.asList("Check Light Status", "लाइट चालू है कया", "लाईट स्थिती तपासा"));
+        map.put(R.string.sound_content, Arrays.asList("Check Sound Status", "ध्वनि चालू है कया", "ध्वनी स्थिती तपासा"));
+        map.put(R.string.live, Arrays.asList("LIVE", "सीधा प्रसारण", "थेट प्रसारण"));
 
         //Notification Activity
         map.put(R.string.leopard, Arrays.asList("leopard", "तेंदुआ", "बिबट्या"));
