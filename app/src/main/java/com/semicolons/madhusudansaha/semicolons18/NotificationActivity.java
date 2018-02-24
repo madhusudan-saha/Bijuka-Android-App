@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,11 +45,17 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
     String buzz;
     String imagePath;
     AppDatabase db;
+    TextView toolbarTitle;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+
+        toolbar = (Toolbar) findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
+        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
 
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -126,15 +133,32 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_english) {
-
+            try {
+                Language.chooseLanguage(getResources().getString(R.string.english), this);
+                translate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_hindi) {
+            try {
+                Language.chooseLanguage(getResources().getString(R.string.hindi), this);
+                translate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_marathi) {
+            try {
+                Language.chooseLanguage(getResources().getString(R.string.marathi), this);
+                translate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
 
@@ -174,4 +198,26 @@ public class NotificationActivity extends AppCompatActivity implements OnMapRead
         this.finish();
     }
 
+    private void translate() {
+        String language = db.dataStoreDao().findByName("language").getValue();
+
+        toolbarTitle.setText(Constants.TRANSLATION.get(R.string.app_name).get(Constants.LANGUAGE.get(language)));
+        switch (type) {
+            case "leopard":
+                typeTextView.setText(Constants.TRANSLATION.get(R.string.leopard).get(Constants.LANGUAGE.get(language)));
+                break;
+            case "deer":
+                typeTextView.setText(Constants.TRANSLATION.get(R.string.deer).get(Constants.LANGUAGE.get(language)));
+                break;
+            case "elephant":
+                typeTextView.setText(Constants.TRANSLATION.get(R.string.elephant).get(Constants.LANGUAGE.get(language)));
+                break;
+            case "monkey":
+                typeTextView.setText(Constants.TRANSLATION.get(R.string.monkey).get(Constants.LANGUAGE.get(language)));
+                break;
+            case "bird":
+                typeTextView.setText(Constants.TRANSLATION.get(R.string.bird).get(Constants.LANGUAGE.get(language)));
+                break;
+        }
+    }
 }

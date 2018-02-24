@@ -14,6 +14,11 @@
     <string name="testbot">Test Drone</string>
 
     <!--Notification Activity-->
+    <string name="leopard">leopard</string>
+    <string name="deer">deer</string>
+    <string name="elephant">elephant</string>
+    <string name="monkey">monkey</string>
+    <string name="bird">bird</string>
 
     <!--Health Monitor Activity-->
     <string name="checkLightStatus">Check Light Status</string>

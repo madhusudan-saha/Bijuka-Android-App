@@ -16,8 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
-
-import java.util.HashMap;
+import android.widget.TextView;
 
 /**
  * Created by Madhusudan Saha on 12-Feb-18.
@@ -32,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     Button hindi;
     Button marathi;
     Button testButton;
-    public Toolbar toolbar;
+    Toolbar toolbar;
+    TextView toolbarTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         /*
         english = (Button) findViewById(R.id.english);
         hindi = (Button) findViewById(R.id.hindi);
@@ -194,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_english) {
             try {
-                chooseLanguage("English");
+                Language.chooseLanguage("English", this);
+                translate();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -203,7 +206,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_hindi) {
             try {
-            chooseLanguage(getResources().getString(R.string.hindi));
+            Language.chooseLanguage(getResources().getString(R.string.hindi), this);
+            translate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -212,7 +216,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_marathi) {
             try {
-                chooseLanguage(getResources().getString(R.string.marathi));
+                Language.chooseLanguage(getResources().getString(R.string.marathi), this);
+                translate();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -242,29 +247,11 @@ public class MainActivity extends AppCompatActivity {
         db.dataStoreDao().update(ds);
     }
 
-    private void chooseLanguage(View v) {
-        String language = ((Button) v).getText().toString();
-        DataStore ds = db.dataStoreDao().findByName("language");
-        if(!ds.getKey().equalsIgnoreCase(language)) {
-            ds.setValue(language);
-            db.dataStoreDao().update(ds);
-
-            translate();
-        }
-    }
-    private void chooseLanguage(String v) {
-        String language = v;
-        DataStore ds = db.dataStoreDao().findByName("language");
-        if(!ds.getKey().equalsIgnoreCase(language)) {
-            ds.setValue(language);
-            db.dataStoreDao().update(ds);
-
-            translate();
-        }
-    }
-
     private void translate() {
         String language = db.dataStoreDao().findByName("language").getValue();
+
+        toolbarTitle.setText(Constants.TRANSLATION.get(R.string.app_name).get(Constants.LANGUAGE.get(language)));
+        testButton.setText(Constants.TRANSLATION.get(R.string.testbot).get(Constants.LANGUAGE.get(language)));
 
         if(subscribedCheckedTextView.isChecked()) {
             subscribeButton.setText(Constants.TRANSLATION.get(R.string.unsubscribe).get(Constants.LANGUAGE.get(language)));

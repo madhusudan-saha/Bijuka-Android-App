@@ -27,11 +27,20 @@ public final class Constants {
         map.put(R.string.app_name, Arrays.asList("BIJUKA", "बिजूका", "बागुलबुवा"));
         map.put(R.string.subscribe, Arrays.asList("Subscribe For Notification", "अधिसूचना के लिए सदस्यता लें", "सूचना साठी सदस्यता घ्या"));
         map.put(R.string.unsubscribe, Arrays.asList("Unsubscribe For Notification", "अधिसूचना के लिए सदस्यता समाप्त करें", "अधिसूचना रद्द करा"));
+        map.put(R.string.testbot, Arrays.asList("Test Drone", "टेस्ट ड्रोन", "टेस्ट ड्रोन"));
 
         //Health Monitor Activity
-        map.put(R.string.checkLightStatus, Arrays.asList("Check Light Status", "लाइट स्टेटस की जांच करें", "लाईट स्थिती तपासा"));
-        map.put(R.string.checkLightStatus, Arrays.asList("Check Sound Status", "ध्वनि स्थिति जांचें", "ध्वनी स्थिती तपासा"));
-        map.put(R.string.checkLightStatus, Arrays.asList("Check Battery Status", "बैटरी स्थिति जांचें", "बॅटरी स्थिती तपासा"));
+        map.put(R.string.light_content, Arrays.asList("Check Light Status", "लाइट स्टेटस की जांच करें", "लाईट स्थिती तपासा"));
+        map.put(R.string.sound_content, Arrays.asList("Check Sound Status", "ध्वनि स्थिति जांचें", "ध्वनी स्थिती तपासा"));
+        map.put(R.string.live, Arrays.asList("LIVE", "लाइव स्ट्रीम", "थेट प्रसारण"));
+
+        //Notification Activity
+        map.put(R.string.leopard, Arrays.asList("leopard", "तेंदुआ", "बिबट्या"));
+        map.put(R.string.deer, Arrays.asList("deer", "हिरन", "हरण"));
+        map.put(R.string.elephant, Arrays.asList("elephant", "हाथी", "हत्ती"));
+        map.put(R.string.monkey, Arrays.asList("monkey", "बंदर", "बंदर"));
+        map.put(R.string.bird, Arrays.asList("bird", "चिड़िया", "पक्षी"));
+
 
         TRANSLATION = Collections.unmodifiableMap(map);
     }
