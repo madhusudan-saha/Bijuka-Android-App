@@ -116,7 +116,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (ds != null) {
                 long diff = System.currentTimeMillis() - (Long.parseLong(ds.getValue()));
                 long seconds = diff / 1000;
-                if (seconds >= 20) {
+                if (seconds >= 60) {
                     buzzTime = true;
                 }
             } else {
