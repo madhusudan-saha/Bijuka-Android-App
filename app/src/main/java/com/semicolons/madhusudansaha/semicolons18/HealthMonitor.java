@@ -15,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 public class HealthMonitor extends AppCompatActivity {
 
     Button live;
@@ -49,6 +51,36 @@ public class HealthMonitor extends AppCompatActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(HealthMonitor.this, LiveStreaming.class);
                 startActivity(intent);
+            }
+        });
+
+        flashButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                String url = "http://192.168.43.185:3003/lightdiag";
+                String result;
+                HttpPostRequest s = new HttpPostRequest();
+                try {
+                    result = s.execute(url, "").get();
+                    
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        soundButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                String url = "http://192.168.43.185:3003/audiodiag";
+                String result;
+                HttpPostRequest s = new HttpPostRequest();
+                try {
+                    result = s.execute(url, "").get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

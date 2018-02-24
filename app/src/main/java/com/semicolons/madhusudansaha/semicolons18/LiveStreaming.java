@@ -26,7 +26,7 @@ public class LiveStreaming extends AppCompatActivity {
     ProgressDialog pDialog;
     ImageView imageView;
 
-    String URL = "https://www.lonelyplanet.com/news/wp-content/uploads/2016/07/Tim1.jpg";
+    String URL = "http://192.168.43.185:3004/get_image_app";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,6 @@ public class LiveStreaming extends AppCompatActivity {
                 pDialog.dismiss();
                 new DownloadImageTask((ImageView) findViewById(R.id.imageView)).execute(URL);
             }
-        }, 1, 1, TimeUnit.SECONDS);
+        }, 2, 1, TimeUnit.SECONDS);
     }
 }
