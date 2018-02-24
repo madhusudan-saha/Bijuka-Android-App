@@ -180,11 +180,11 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_hindi) {
             try {
-            Language.chooseLanguage(getResources().getString(R.string.hindi), this);
-            translate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                Language.chooseLanguage(getResources().getString(R.string.hindi), this);
+                translate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return true;
         }
         //noinspection SimplifiableIfStatement
@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbarTitle.setText(Constants.TRANSLATION.get(R.string.app_name).get(Constants.LANGUAGE.get(language)));
         testButton.setText(Constants.TRANSLATION.get(R.string.testbot).get(Constants.LANGUAGE.get(language)));
+        testButton.setTextSize(16f);
 
         if(subscribedCheckedTextView.isChecked()) {
             subscribeButton.setText(Constants.TRANSLATION.get(R.string.unsubscribe).get(Constants.LANGUAGE.get(language)));

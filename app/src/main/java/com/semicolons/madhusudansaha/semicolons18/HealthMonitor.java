@@ -169,5 +169,9 @@ public class HealthMonitor extends AppCompatActivity {
         flashButton.setText(Constants.TRANSLATION.get(R.string.light_content).get(Constants.LANGUAGE.get(language)));
         soundButton.setText(Constants.TRANSLATION.get(R.string.sound_content).get(Constants.LANGUAGE.get(language)));
         live.setText(Constants.TRANSLATION.get(R.string.live).get(Constants.LANGUAGE.get(language)));
+
+        flashButton.setTextSize(16f);
+        soundButton.setTextSize(16f);
+        live.setTextSize(16f);
     }
 }

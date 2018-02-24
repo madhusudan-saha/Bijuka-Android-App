@@ -16,7 +16,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/farm1_blur"
+        android:background="@drawable/wheat_blur"
         android:layout_weight="1">
 
         <CheckedTextView
@@ -60,7 +60,9 @@
             app:layout_constraintBottom_toTopOf="@+id/subscribeButton"
             android:layout_marginBottom="8dp"
             style="@android:style/Widget.Material.Light.Button.Borderless.Small"
-            android:background="@drawable/button_right"
+
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/primary"
             android:layout_marginStart="16dp"
             app:layout_constraintLeft_toLeftOf="parent" />
 
